@@ -1,0 +1,26 @@
+{
+    "plugins": [
+        "mobi.monaca.plugins.Monaca",
+        "org.apache.cordova.device-motion",
+        "org.apache.cordova.camera",
+        "org.apache.cordova.device-orientation",
+        "org.apache.cordova.geolocation",
+        "org.apache.cordova.network-information",
+        "org.apache.cordova.vibration",
+        "org.apache.cordova.contacts",
+        "org.apache.cordova.splashscreen",
+        "org.apache.cordova.device",
+        "plugin.push.nifty"
+    ],
+    "framework_version": "3.5",
+    "xcode_version": "6",
+    "cordova_version": "4.1",
+    "plugin_settings": [],
+    "title-ja": "",
+    "title-en": "",
+    "description-ja": "",
+    "description-en": "",
+    "category": "User Template",
+    "platform": [],
+    "name": "generated-1438924229-55c1f958fd17341579327f68"
+}
