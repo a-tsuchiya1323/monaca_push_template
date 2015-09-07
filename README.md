@@ -36,7 +36,8 @@
 
 File: www/js/app.js
 
-** 初期化設定
+ - 初期化設定
+
 ```JavaScript
 var appKey    = "YOUR_APPKEY";
 var clientKey = "YOUR_CLIENTKEY";
@@ -51,7 +52,7 @@ $(function() {
 上記のコードでキーを指定し、NCMB.initialize(appKey, clientKey), mBaaSサーバーと連携を行います。
 Android端末の場合、Android senderIDも追記してください。
 
-* デバイストークン登録：
+* デバイストークン登録
 
 ```JavaScript
 document.addEventListener("deviceready", function()
@@ -65,7 +66,6 @@ document.addEventListener("deviceready", function()
     // trueを設定すると、開封通知を行う
     window.NCMB.monaca.setReceiptStatus(true);
 },false);
-
 ```
 
 * デバイストークンにカスタマイズ値を追加する場合
@@ -138,7 +138,8 @@ function startInstallationRegistration() {
 * プッシュ通知の設定を行います。
  - iOSの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_ios.html)に参照してください
  - Androidの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_android.html)に参照してください
-   www/js/ncmb_push_start.jsにてsenderId設定を行います。
+ 
+  www/js/ncmb_push_start.jsにてsenderId設定を行います。
 
 * monacaで作成したアプリをmobile backendサーバーと連携させる
   - monacaでアプリキー、クライアントキーを設定し、初期化を行う: www/js/ncmb_push_start.js
