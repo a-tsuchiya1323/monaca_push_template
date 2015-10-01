@@ -1,34 +1,35 @@
-、# Monaca x NIFTYCLOUD mobile backend プッシュ通知サンプル
+﻿# Monaca x NIFTY Cloud mobile backend プッシュ通知サンプル
 
 ===
 
 # Overview
 
-こちらはMonacaを利用して、mbaasサーバーデバイストークンを登録し、プッシュ通知機能を簡単に実装するサンプルです。
-* Android, iOSアプリをHTML, JavaScriptで簡単に作れるツール[Monaca](https://ja.monaca.io/)
-* アプリのサーバー機能を簡単に作れるツール[Nifty cloud mobile backend](http://mb.cloud.nifty.com/) (以下からmBaaS)
+Monacaを用いて作ったアプリとmobile backendを連携して、デバイストークンの登録を行い、プッシュ通知機能を簡単に実装するサンプルコードとなります。
+* HTML/CSS/JavaScriptでマルチプラットフォーム（iOS/Android/Windowsなど）にアプリを開発できる統合開発環境[Monaca](https://ja.monaca.io/)
+* スマホアプリのサーバ側機能（プッシュ通知、会員管理、DBなど）をサーバ開発不要で実装できる[NIFTY Cloud mobile backend](http://mb.cloud.nifty.com/?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
 
 ![overview](readme-img/overview.JPG "概要図")
 
 ## Demo
 
-* mBaaSにてアプリ作成、プッシュ通知設定を行います。
-* MonacaでgithubのURL(Download zip file)をインポートし、
-アプリキーとクライントキーを設定し、アプリを起動（実機ビルド）します。
-デバイストークンを登録し、管理画面からプッシュ配信を登録すると、プッシュが来たことを確認します。
-※アプリからプッシュ通知登録は可能ですが、本サンプルに含まりません。
+* mBaaSにて、アプリの作成とプッシュ通知の設定を行います。
+* MonacaでgithubのURL(https://github.com/ncmbadmin/monaca_push_template/archive/master.zip)をインポートし、
+アプリケーションキーとクライントキーを設定してください。
+アプリを実機ビルドした上起動すると、デバイストークンが登録されます。
+管理画面からプッシュ通知を登録すると、実際に端末に通知が届くのを確認できます。
+※本サンプルコードは、管理画面からのみプッシュ通知の配信が行えます。mBaaSではアプリからのプッシュ通知登録も可能ですが、本サンプルでは取り扱っていません。
 
-* トップ画面
+* 起動画面
 
-![demo2](readme-img/demo1.JPG "登録完了")
+![demo2](readme-img/demo1.JPG "起動画面" =100x80)
 
 * 登録成功画面
 
-![demo1](readme-img/demo2.JPG "起動画面")
+![demo1](readme-img/demo2.JPG "登録成功画面" =100x80)
 
-* 管理画面で野確認
+* ダッシュボードでの確認
 
-![demo3](readme-img/result.JPG "起動画面")
+![demo3](readme-img/result.JPG "ダッシュボードでの確認")
 
 ## Description
 
@@ -48,8 +49,8 @@ $(function() {
   NCMB.initialize(appKey, clientKey);
 });
 ```
-
-上記のコードでキーを指定し、NCMB.initialize(appKey, clientKey), mBaaSサーバーと連携を行います。
+上記のコードでアプリケーションキーとクライアントキーを指定し、
+NCMB.initialize(appKey, clientKey)　でmBaaSサーバと連携を行います。
 Android端末の場合、Android senderIDも追記してください。
 
 * デバイストークン登録
@@ -68,8 +69,7 @@ document.addEventListener("deviceready", function()
 },false);
 ```
 
-* デバイストークンにカスタマイズ値を追加する場合
-Exp: "Place", "Age"入力から登録を行います。
+* デバイストークンのほかに、住所や年齢などのカスタマイズ値を追加する場合は、以下のように登録を行います。
 
 ```JavaScript
 function startInstallationRegistration() {
@@ -112,55 +112,58 @@ function startInstallationRegistration() {
 ## Requirement
 
 * Monaca環境
-* Nifty cloud mobile backend Javascript SDK version 1.2.6
-ダウンロード：[Javascript SDK](http://mb.cloud.nifty.com/doc/current/introduction/sdkdownload_javascript.html)
+* NIFTY Cloud mobile backend Javascript SDK version 1.2.6
+ダウンロード：[Javascript SDK](http://mb.cloud.nifty.com/doc/current/introduction/sdkdownload_javascript.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
 
 ## Installation
 
+
 * Monacaで新規アプリ作成し、プロジェクトをインポートする。
-  - monacaの利用登録する
+  - Monacaの利用登録
     [Monaca](https://ja.monaca.io/)
-![monaca](readme-img/monaca.JPG "新規プロジェクト")
-  - monacaで新規プロジェクトを作成する
+![Monaca](readme-img/monaca.JPG "新規プロジェクト")
+  - Monacaで新規プロジェクトを作成し、プロジェクトのインポートを選択します。
 ![create](readme-img/monaca_new_project.JPG "新規プロジェクト")
+  - 「URLからインポートする」を選択し、URLに https://github.com/ncmbadmin/sample_monaca_login_template/archive/master.zip を指定します。
 ![create](readme-img/monaca_new_project_2.JPG "新規プロジェクト")
 
-* Monacaでアプリ作成する: プロジェクトインポートを選択し、「URLを指定してインポートする」と選び、以下のURLからインポートする。
- https://github.com/ncmbadmin/monaca_push_template/archive/master.zip
-
+* mobile backendでアプリ作成する
+  - mobile backend 利用登録
+    [NIFTY Cloud mobile backend](http://mb.cloud.nifty.com/?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
+![register](readme-img/register.JPG "登録画面")
+  - mobile backendでアプリ作成する
 ![newapp](readme-img/newapp.JPG "新規アプリ作成")
 
-* mobile backendでアプリ作成する
-  - mobile backendで利用登録する
-    [Nifty cloud mobile backend](http://mb.cloud.nifty.com/)
-![register](readme-img/register.JPG "登録画面")
+* Monacaで作成したアプリをmobile backendサーバーと連携させる
+  - Monacaでアプリケーションキー、クライアントキーを設定し、初期化を行う
 
-* プッシュ通知の設定を行います。
- - iOSの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_ios.html)に参照してください
- - Androidの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_android.html)に参照してください
- 
-  www/js/ncmb_push_start.jsにてsenderId設定を行います。
-
-* monacaで作成したアプリをmobile backendサーバーと連携させる
-  - monacaでアプリキー、クライアントキーを設定し、初期化を行う: www/js/ncmb_push_start.js
 ![initialize2](readme-img/appKeyClientKey.JPG "初期化")
-キーをコピーし、追記します。
 ![initialize](readme-img/appKeyClientKey_setting.JPG "初期化")
 
+キーをコピーし、追記します。
+
+* プッシュ通知の設定を行います。
+ - iOSの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_ios.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)に参照してください
+ - Androidの場合：[ドキュメント](http://mb.cloud.nifty.com/doc/current/tutorial/push_setup_android.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)に参照してください
+
+  www/js/ncmb_push_start.jsにてsenderId設定を行います。
+
 * 動作確認
-  - monacaで実機ビルドし、動作確認する
-![demo](readme-img/demo1.JPG "動作確認")
+  - Monacaで実機ビルドし、動作確認する
+![demo](readme-img/demo1.JPG "動作確認" =100x80)
   - プッシュ通知を登録し、プッシュ通知が来ることを確認する
-![demo](readme-img/demo2.JPG "動作確認")
+![demo](readme-img/demo2.JPG "動作確認" =100x80)
 
 ## Usage
 
-サンプルコードをカスタマイズする、key, value変数を変更していただきます。
-以下のドキュメントを参照し、データ保存・検索・プッシュ通知を入れることができる。
-* [ドキュメント](http://mb.cloud.nifty.com/doc/current/)
-* [ドキュメント・データストア](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/datastore.html)
-* [ドキュメント・会員管理](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/user.html)
-* [ドキュメント・プッシュ通知](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/push.html)
+サンプルコードをカスタマイズすることで、様々な機能を実装できます！
+データ保存・データ検索・会員管理・プッシュ通知などの機能を実装したい場合には、
+以下のドキュメントもご参考ください。
+
+* [ドキュメント](http://mb.cloud.nifty.com/doc/current/?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
+* [ドキュメント・データストア](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/datastore.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
+* [ドキュメント・会員管理](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/user.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
+* [ドキュメント・プッシュ通知](http://mb.cloud.nifty.com/doc/current/sdkguide/javascript/push.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_push_template)
 
 
 ## Contributing
@@ -174,4 +177,4 @@ function startInstallationRegistration() {
 ## License
 
 * MITライセンス
-* Nifty cloud mobile backendのJavascript SDKのライセンス
+* NIFTY Cloud mobile backendのJavascript SDKのライセンス
