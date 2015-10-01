@@ -21,7 +21,7 @@ Monacaを用いて作ったアプリとmobile backendを連携して、デバイ
 
 * 起動画面
 
-![demo2](readme-img/demo1.JPG "起動画面" =100x80)
+![demo2](readme-img/demo1.JPG =100x80 "起動画面")
 
 * 登録成功画面
 
