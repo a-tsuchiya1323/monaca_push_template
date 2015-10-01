@@ -21,11 +21,11 @@ Monacaを用いて作ったアプリとmobile backendを連携して、デバイ
 
 * 起動画面
 
-![demo2](readme-img/demo1.JPG =100x80 "起動画面")
+![demo2](readme-img/demo1.JPG "起動画面")
 
 * 登録成功画面
 
-![demo1](readme-img/demo2.JPG "登録成功画面" =100x80)
+![demo1](readme-img/demo2.JPG "登録成功画面")
 
 * ダッシュボードでの確認
 
@@ -150,9 +150,9 @@ function startInstallationRegistration() {
 
 * 動作確認
   - Monacaで実機ビルドし、動作確認する
-![demo](readme-img/demo1.JPG "動作確認" =100x80)
+![demo](readme-img/demo1.JPG "動作確認")
   - プッシュ通知を登録し、プッシュ通知が来ることを確認する
-![demo](readme-img/demo2.JPG "動作確認" =100x80)
+![demo](readme-img/demo2.JPG "動作確認")
 
 ## Usage
 
