@@ -6,7 +6,7 @@ var senderId  = "YOUR_ANDROID_SENDERID";
 
 ///// Called when app launch
 $(function() {
-  NCMB.initialize(appKey, clientKey);
+  var ncmb = new NCMB(appKey,clientKey);
 });
 
 /////Installation registration
@@ -16,7 +16,7 @@ document.addEventListener("deviceready", function()
     window.NCMB.monaca.setHandler
     (
         function(jsonData){
-            // 送信時に指定したJSONが引数として渡されます 
+            // 送信時に指定したJSONが引数として渡されます
             alert("callback :::" + JSON.stringify(jsonData));
         }
     );
@@ -28,7 +28,7 @@ document.addEventListener("deviceready", function()
     // trueを設定すると、開封通知を行う
     window.NCMB.monaca.setReceiptStatus(true);
     //alert("DeviceToken is registed");
-},false); 
+},false);
 
 function startInstallationRegistration() {
     // 登録されたinstallationのobjectIdを取得します。
@@ -37,30 +37,20 @@ function startInstallationRegistration() {
             var place = document.getElementById("place").value;
             var age = document.getElementById("age").value;
             //サーバーへの更新実施
-            var InstallationCls = NCMB.Object.extend("installation");
-            var installation = new InstallationCls();
-            var query = new NCMB.Query(InstallationCls);
-            query.get(id, {
-                success: function(inst) {
+            ncmb.Installation.fetchById(id)
+                 .then(function(installation){
                     ////端末のPlaceの値を設定
-                    inst.set("Place", place);
+                    installation.set("Place", place);
                     ////端末のAgeの値を設定
-                    inst.set("Age", age);
-                    inst.save(null, {
-                        success: function(obj) {
-                          // 保存完了後に実行される
-                          alert("プッシュ通知受信登録成功！"); 
-                        },
-                        error: function(obj, error) {
-                          // エラー時に実行される
-                          alert("登録失敗！次のエラー発生: " + error.message);
-                        }
-                    });
-                }, 
-                error: function(inst, error) {
-                    alert("登録失敗！次のエラー発生: " + error.message);
-                }
-            });
+                    installation.set("Age", age);
+                    return installation.update();
+                  })
+                 .then(function(installation){
+                    // 更新後の処理
+                  })
+                 .catch(function(err){
+                    // エラー処理
+                  }));
         }
     );
 }
