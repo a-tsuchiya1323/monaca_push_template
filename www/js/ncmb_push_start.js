@@ -3,10 +3,10 @@
 var appKey    = "YOUR_APP_KEY";
 var clientKey = "YOUR_CLIENT_KEY";
 var senderId  = "YOUR_ANDROID_SENDERID";
+var ncmb = new NCMB(appKey,clientKey);
 
 ///// Called when app launch
 $(function() {
-  var ncmb = new NCMB(appKey,clientKey);
 });
 
 /////Installation registration
@@ -47,10 +47,12 @@ function startInstallationRegistration() {
                   })
                  .then(function(installation){
                     // 更新後の処理
+                    alert("登録完了");
                   })
                  .catch(function(err){
                     // エラー処理
-                  }));
+                    alert("エラー発生");
+                  });
         }
     );
 }
