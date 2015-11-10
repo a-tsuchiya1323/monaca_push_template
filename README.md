@@ -35,8 +35,7 @@ Monacaを用いて作ったアプリとmobile backendを連携して、デバイ
 ## Requirement
 
 * Monaca環境
-* Nifty cloud mobile backend Javascript SDK version 1.2.6　ダウンロード：[Javascript SDK](http://mb.cloud.nifty.com/doc/1.2.6/introduction/sdkdownload_javascript.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_data_registration)
-* ※version 2.0.0はまだ準備中です。
+* Nifty cloud mobile backend Javascript SDK version 2.0.2　ダウンロード：[Javascript SDK](http://mb.cloud.nifty.com/doc/current/introduction/sdkdownload_javascript.html?utm_source=community&utm_medium=referral&utm_campaign=sample_monaca_data_registration)
 
 ## Installation
 
@@ -85,17 +84,14 @@ File: www/js/app.js
  - 初期化設定
 
 ```JavaScript
-var appKey    = "YOUR_APPKEY";
-var clientKey = "YOUR_CLIENTKEY";
+var appKey    = "YOUR_APP_KEY";
+var clientKey = "YOUR_CLIENT_KEY";
 var senderId  = "YOUR_ANDROID_SENDERID";
-
-///// Called when app launch
-$(function() {
-  NCMB.initialize(appKey, clientKey);
-});
+var ncmb = new NCMB(appKey,clientKey);
 ```
+
 上記のコードでアプリケーションキーとクライアントキーを指定し、
-NCMB.initialize(appKey, clientKey)　でmBaaSサーバと連携を行います。
+NCMB(appKey, clientKey)　でmBaaSサーバと連携を行います。
 Android端末の場合、Android senderIDも追記してください。
 
 * デバイストークン登録
@@ -124,30 +120,22 @@ function startInstallationRegistration() {
             var place = document.getElementById("place").value;
             var age = document.getElementById("age").value;
             //サーバーへの更新実施
-            var InstallationCls = NCMB.Object.extend("installation");
-            var installation = new InstallationCls();
-            var query = new NCMB.Query(InstallationCls);
-            query.get(id, {
-                success: function(inst) {
+            ncmb.Installation.fetchById(id)
+                 .then(function(installation){
                     ////端末のPlaceの値を設定
-                    inst.set("Place", place);
+                    installation.set("Place", place);
                     ////端末のAgeの値を設定
-                    inst.set("Age", age);
-                    inst.save(null, {
-                        success: function(obj) {
-                          // 保存完了後に実行される
-                          alert("プッシュ通知受信登録成功！");
-                        },
-                        error: function(obj, error) {
-                          // エラー時に実行される
-                          alert("登録失敗！次のエラー発生: " + error.message);
-                        }
-                    });
-                },
-                error: function(inst, error) {
-                    alert("登録失敗！次のエラー発生: " + error.message);
-                }
-            });
+                    installation.set("Age", age);
+                    return installation.update();
+                  })
+                 .then(function(installation){
+                    // 更新後の処理
+                    alert("登録完了");
+                  })
+                 .catch(function(err){
+                    // エラー処理
+                    alert("エラー発生");
+                  });
         }
     );
 }
